@@ -5,8 +5,8 @@ class AnalyticalMethodService:
     def __init__(self):
         self.repository = AnalyticalMethodRepository()
 
-    def create_method(self, method_name, method_description, sample_matrix, cost_per_sample):
-        return self.repository.create_method(method_name, method_description, sample_matrix, cost_per_sample)
+    def create_method(self, method_name, method_description, sample_matrix, cost_per_sample, instrument=None):
+        return self.repository.create_method(method_name, method_description, sample_matrix, cost_per_sample, instrument)
 
     def get_method_by_id(self, method_id):
         return self.repository.get_method_by_id(method_id)

@@ -7,4 +7,4 @@ class AnalyticalMethodSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Analytical_Method
         fields = ("method_name", "method_description",
-                  "sample_matrix", "cost_per_sample")
+                  "sample_matrix", "cost_per_sample", "instrument")

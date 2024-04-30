@@ -2,12 +2,13 @@ from .models import Analytical_Method
 
 
 class AnalyticalMethodRepository:
-    def create_method(self, method_name, method_description, sample_matrix, cost_per_sample):
+    def create_method(self, method_name, method_description, sample_matrix, cost_per_sample, instrument=None):
         return Analytical_Method.objects.create(
             method_name=method_name,
             method_description=method_description,
             sample_matrix=sample_matrix,
-            cost_per_sample=cost_per_sample
+            cost_per_sample=cost_per_sample,
+            instrument=instrument
         )
 
     def get_method_by_id(self, method_id):

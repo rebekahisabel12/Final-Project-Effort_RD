@@ -8,14 +8,13 @@ from .models import Analytical_Method
 
 
 def log_analyticalmethod_to_csv(sender, instance, **kwargs):
-    print("I am a signal! I was called because an Analytical method was saved!"))
-
+    print("I am a signal! I was called because an Analytical method was saved!")
 
     with open(file, "a+", newline="") as csvfile:
-        logfile= File(csvfile)
-        logwriter= csv.writer(
+        logfile = File(csvfile)
+        logwriter = csv.writer(
             logfile,
-            delimiter = ",",
+            delimiter=",",
         )
         logwriter.writerow(
             [
@@ -24,11 +23,13 @@ def log_analyticalmethod_to_csv(sender, instance, **kwargs):
                 instance.sample_matrix,
                 instance.cost_per_sample,
                 instance.date_added,
+                instance.instrument,
             ]
         )
 
-    file = Path(__file__).parent.parent / "chromatographyarch" / "domain" / "created_log.csv"
+    file = Path(__file__).parent.parent / "chromatographyarch" / \
+        "domain" / "created_log.csv"
     print(f"Writing to {file}")
 
 
-post_save.connect(log_analytical_method_to_csv, sender=Analytical_Method)
+post_save.connect(log_analyticalmethod_to_csv, sender=Analytical_Method)
