@@ -1,1 +1,5 @@
 # Assignment-6-UOW-Bound_Coup_Messag_RD
+
+# So as I understand it, the purpose of this homework is to understand the significance of the Unit of Work pattern. The pattern is supposed to let us consolidate lots of database operations into a single transaction. It does this by incorporating it with the Repository which serves as an 'abstraction' between the app and the database. this is supposd to help us keep cleaner code, maintain it easier and  and minimizes the chances of messing up the database. 
+# I defiantly sruggled in getting the code to implement this. I'm more focusing on making my tests work and using the Barky Code as a guide for how to make my project. Its going as good as it can. I understand all the concepts but because I don't really have that much experience with it its tougher to fully implement. 
+# So far I enjoy the struggle. I feel it helps me learn more. 

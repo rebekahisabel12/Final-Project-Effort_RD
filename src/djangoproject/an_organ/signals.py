@@ -31,5 +31,4 @@ def log_analyticalmethod_to_csv(sender, instance, **kwargs):
     print(f"Writing to {file}")
 
 
-# connect the signal to this receiver
 post_save.connect(log_analytical_method_to_csv, sender=Analytical_Method)
