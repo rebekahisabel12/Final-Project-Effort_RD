@@ -5,38 +5,70 @@ from rest_framework import routers
 from rest_framework.test import APIRequestFactory, APITestCase
 
 
-from .models import Analytical_Method
-from .views import AnalyticalMethodViewSet
+from .models import AnalyticalMethod
+from .models import Instrument
+from .views import AnalyticalMethodViewSet, InstrumentViewSet
 
 
-class AnalyticalMethodTests(APITestCase):
+class InstrumentAPITestCase(APITestCase):
     def setUp(self):
         self.factory = APIRequestFactory()
-        self.analytical_method = Analytical_Method.objects.create(
-            method_name="pH",
-            method_description="testing pH of liquid",
-            sample_matrix="liquid",
-            cost_per_sample=50.00,
-        )
+        self.view = InstrumentViewSet.as_view(
+            {'post': 'create', 'get': 'retrieve'})
+        self.instrument_data = {
+            'manufacturer': 'Manufacturer X',
+            'sample_type': 'Solid',
+            'price_per_sample': '100.00'
+        }
+        self.instrument = Instrument.objects.create(**self.instrument_data)
 
-        self.list_url = reverse("an_organ:analytical_method-list")
-        self.detail_url = reverse(
-            "an_organ:analytical_method-detail", kwargs={"pk": self.analytical_method.pk}
-        )
+    def test_create_instrument(self):
+        url = '/api/instruments/'
+        request = self.factory.post(url, self.instrument_data, format='json')
+        response = self.view(request)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Instrument.objects.count(), 2)
+        self.assertEqual(
+            Instrument.objects.last().manufacturer, 'Manufacturer X')
+
+
+class AnalyticalMethodAPITestCase(APITestCase):
+    def setUp(self):
+        self.factory = APIRequestFactory()
+        self.view = AnalyticalMethodViewSet.as_view(
+            {'post': 'create', 'get': 'retrieve'})
+        self.instrument_data = {
+            'manufacturer': 'Manufacturer X',
+            'sample_type': 'Solid',
+            'price_per_sample': '100.00'
+        }
+        self.instrument = Instrument.objects.create(**self.instrument_data)
+
+        self.analytical_method_data = {
+            'name': 'Test Method',
+            'description': 'Test Method Description',
+            'instrument': reverse('instrument-detail', kwargs={'pk': self.instrument.pk}),
+        }
 
     def test_create_analytical_method(self):
-        data = {
-            "method_name": "internal temp",
-            "method_description": "Taking the temperature of liquid.",
-            "sample_matrix": "liquid",
-            "cost_per_sample": "20.00",
-        }
-        response = self.client.post(self.list_url, data, format="json")
-        self.assertTrue(status.is_success(response.status_code))
-        self.assertEqual(Analytical_Method.objects.count(), 2)
-        created_method = Analytical_Method.objects.get(
-            method_name="internal temp")
-        self.assertEqual(created_method.method_name, "internal temp")
+        url = '/api/analytical-methods/'
+        request = self.factory.post(
+            url, self.analytical_method_data, format='json')
+        response = self.view(request)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(AnalyticalMethod.objects.count(), 1)
+        self.assertEqual(
+            AnalyticalMethod.objects.last().name, 'Test Method')
+
+        # response = self.client.post(self.list_url, data, format="json")
+        # print("Response status code:", response.status_code)
+        # print("Response content:", response.content.decode('utf-8'))
+
+        # self.assertTrue(status.is_success(response.status_code))
+        # self.assertEqual(Analytical_Method.objects.count(), 2)
+        # created_method = Analytical_Method.objects.get(
+        #     method_name="internal temp")
+        # self.assertEqual(created_method.method_name, "internal temp")
 
     # def test_analytical_method_detail(self):
     #     url = reverse('analytical-method-detail',

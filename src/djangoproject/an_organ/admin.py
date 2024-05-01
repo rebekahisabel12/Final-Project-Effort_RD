@@ -1,4 +1,5 @@
 from django.contrib import admin
-from .models import Analytical_Method
+from .models import AnalyticalMethod, Instrument
 
-admin.site.register(Analytical_Method)
+admin.site.register(AnalyticalMethod)
+admin.site.register(Instrument)

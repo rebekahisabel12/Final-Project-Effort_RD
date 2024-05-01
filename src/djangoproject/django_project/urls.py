@@ -5,5 +5,3 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("an_organ.urls")),
 ]
-
-print(urlpatterns)
