@@ -22,7 +22,7 @@ class InstrumentViewSet(viewsets.ModelViewSet):
     queryset = Instrument.objects.all().order_by("-instrument_id")
     serializer_class = InstrumentSerializer
     permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+        permissions.IsAuthenticatedOrReadOnly]
 
     @action(detail=True, methods=['get'])
     def instrument_detail(self, request, pk=None):
@@ -31,7 +31,9 @@ class InstrumentViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        if 'owner' in serializer.validated_data:
+            del serializer.validated_data['owner']
+        serializer.save()
 
 # class AnalyticalMethodRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
 #     queryset = AnalyticalMethod.objects.all()
