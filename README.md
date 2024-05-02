@@ -1,5 +1,7 @@
-# Assignment-6-UOW-Bound_Coup_Messag_RD
+# Assignment-7
 
-# So as I understand it, the purpose of this homework is to understand the significance of the Unit of Work pattern. The pattern is supposed to let us consolidate lots of database operations into a single transaction. It does this by incorporating it with the Repository which serves as an 'abstraction' between the app and the database. this is supposd to help us keep cleaner code, maintain it easier and  and minimizes the chances of messing up the database. 
-# I defiantly sruggled in getting the code to implement this. I'm more focusing on making my tests work and using the Barky Code as a guide for how to make my project. Its going as good as it can. I understand all the concepts but because I don't really have that much experience with it its tougher to fully implement. 
-# So far I enjoy the struggle. I feel it helps me learn more. 
+# Working off assignment-6, looking to implement internal and external message bussing and pass a few of my tests. If its not obvious an_organ is my api folder similar to the barkyapi folder. I went with Django signals here and still continued to follow the barky code.
+
+# Because of the way I want to run my permissions and views I have to make the test correctly. Learning why making the test firsts is crucial instead of making the code first. 
+
+ 
