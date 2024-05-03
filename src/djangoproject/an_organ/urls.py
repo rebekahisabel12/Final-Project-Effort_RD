@@ -17,6 +17,7 @@ urlpatterns = [
     path("", include(router.urls)),
 ]
 
+urlpatterns += router.urls
 
 #  self.list_url = reverse("barkyapi:bookmark-list")
 #         self.detail_url = reverse(
