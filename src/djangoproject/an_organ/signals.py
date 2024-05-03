@@ -15,7 +15,7 @@ channel_layer = get_channel_layer()
 
 
 def log_instrument_to_csv(sender, instance, **kwargs):
-    print("Instrument signal: Logging to CSV")
+    print("Instrument signal: CSV")
 
     file = Path(__file__).parent.parent / "chromatographyarch" / \
         "domain" / "instrument_log.csv"
@@ -37,12 +37,12 @@ def log_instrument_to_csv(sender, instance, **kwargs):
 
 
 def send_instrument_to_channel(sender, instance, **kwargs):
-    print("Instrument signal: Sending to Channel")
+    print("Instrument signal: Channel")
     print(f"Sending instrument to channel: {instance}")
 
     async_to_sync(channel_layer.send)(
         "instruments-add", {"type": "print.instrument",
-                            "data": instance.instrument_id}
+                            "data": instance.manufacturer}
     )
 
 

@@ -5,11 +5,11 @@ import json
 from channels.consumer import AsyncConsumer, SyncConsumer
 from channels.generic.http import AsyncHttpConsumer
 
-from an_organ.models import Instrument
+from an_organ.models import AnalyticalMethod, Instrument
 
 
 class SimpleInstrumentConsumer(AsyncConsumer):
-    async def print_bookmark(self, message):
+    async def print_instrument(self, message):
         print(f"WORKER: Instrument: {message['data']}")
 
 

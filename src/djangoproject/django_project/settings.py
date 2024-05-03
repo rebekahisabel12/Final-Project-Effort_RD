@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'rest_framework',
     'an_organ.apps.AnOrganConfig',
     'chromatographyarch.apps.ChromatographyArchConfig',

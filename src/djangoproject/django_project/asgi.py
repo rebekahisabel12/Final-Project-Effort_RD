@@ -20,7 +20,8 @@ chromatography_asgi_app = get_asgi_application()
 
 application = ProtocolTypeRouter(
     {
-        "http": ChannelNameRouter(
+        "http": chromatography_asgi_app,
+        "channel": ChannelNameRouter(
             {
                 "instruments-add": consumers.SimpleInstrumentConsumer.as_asgi(),
             }
