@@ -29,7 +29,6 @@ def log_instrument_to_csv(sender, instance, **kwargs):
         )
         logwriter.writerow(
             [
-                instance.instrument_id,
                 instance.manufacturer,
                 instance.sample_type,
             ]

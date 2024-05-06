@@ -1,7 +1,3 @@
-# Assignment-7
+# Assignment-8
 
-# Working off Assignment-6, looking to implement internal and external message bussing and pass a few of my tests. If its not obvious an_organ is my api folder similar to the barkyapi folder. I went with Django signals here but still have the tasks.py file importing Celery. Still continued to follow the barky code.
-
-# Because of the way I want to run my permissions and views I was struggling making the tests pass correctly. Learning why making the test firsts is crucial instead of making the code first. I'm testing the Instrument class mostly because I wrote the code in a way that the AnalyticalMethod class needs a field from the Instrument class, so in a progression with more time I will test the AnalyticalMethod class as well as complete the tests for the Instrument class. 
-
- 
+# Working off Assignment-7, I was able to successfully implement a messaging system using Django Channels to allow for a two-way communcation facilitated by Redis and to trigger actions when certain events occur. I set up channels, routers, and consumers to handle different types of messages within my app. In implementing Django Cannels and getting to this Refactor 4 and in examining this particular architecture which I understand is designed to streamline processes within projects I can't help but note that even though the more thorough design is supposed to make everything more maintainable and reduce the complexity as an intro coder the more files and the larger the project makes everything look and appear the opposite. Which I think added to the fear in taking on these refactors. But really following along with the code and successfully implementing changes and princeples is a great learning experience. 

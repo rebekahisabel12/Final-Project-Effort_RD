@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My Django Project</title>
+    <!-- Add CSS styles for admin-like layout -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add custom CSS styles here */
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">My Django Project</a>
+
+        <!-- Navigation links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <!-- Login link -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'rest_framework:login' %}">Login</a>
+                </li>
+
+                <!-- Logout link (displayed only if user is authenticated) -->
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'rest_framework:logout' %}">Logout</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h2>Analytical Methods</h2>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            {% for method in analytical_methods %}
+                            <li class="list-group-item">
+                                <a href="{% url 'an_organ:analyticalmethod-detail' method.pk %}">{{ method.method_name
+                                    }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h2>Instruments</h2>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            {% for instrument in instruments %}
+                            <li class="list-group-item">
+                                <a href="{% url 'an_organ:instrument-detail' instrument.pk %}">{{
+                                    instrument.instrument_name }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <span class="text-muted">© 2024 Your Company Name</span>
+        </div>
+    </footer>
+</body>
+
+</html>

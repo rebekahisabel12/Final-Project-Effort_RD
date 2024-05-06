@@ -3,20 +3,22 @@ from .models import AnalyticalMethod, Instrument, LANGUAGE_CHOICES, STYLE_CHOICE
 from django.contrib.auth.models import User
 
 
-class InstrumentSerializer(serializers.HyperlinkedModelSerializer):
+class InstrumentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Instrument
-        fields = ("instrument_id", "manufacturer", "sample_type")
+        fields = '__all__'
 
 
-class AnalyticalMethodSerializer(serializers.HyperlinkedModelSerializer):
+class AnalyticalMethodSerializer(serializers.ModelSerializer):
     class Meta:
         model = AnalyticalMethod
-        fields = ("method_name", "method_description",
-                  "cost_per_sample", "instrument")
+        fields = '__all__'
 
 
 class UserSerializer(serializers.ModelSerializer):
+    instruments = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=Instrument.objects.all()
+    )
     analyticalmethod = AnalyticalMethodSerializer(many=True, read_only=True)
 
     class Meta:
